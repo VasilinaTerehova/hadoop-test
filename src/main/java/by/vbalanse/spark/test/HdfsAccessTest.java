@@ -12,12 +12,16 @@ import java.io.IOException;
  */
 public class HdfsAccessTest {
     public static void main(String[] args) throws IOException {
-        Configuration conf = new Configuration();
-        conf.addResource(new Path("/HADOOP_HOME/conf/core-site.xml"));
-        conf.addResource(new Path("/HADOOP_HOME/conf/hdfs-site.xml"));
-        FileSystem hdfs = FileSystem.get(conf);
+        FileSystem hdfs = getFileSystem();
 
-        boolean success = hdfs.mkdirs(new Path("/user/cloudera/testdirectory"));
+        boolean success = hdfs.mkdirs(new Path("/user/devuser/configs"));
         System.out.println(success);
+    }
+
+    public static FileSystem getFileSystem() throws IOException {
+        Configuration conf = new Configuration();
+        conf.addResource(new Path("file:///D:/!!!configs/core-site.xml"));
+        conf.addResource(new Path("file:///D:/!!!configs/hdfs-site.xml"));
+        return FileSystem.get(conf);
     }
 }
