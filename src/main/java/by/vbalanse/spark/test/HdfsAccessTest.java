@@ -3,6 +3,7 @@ package by.vbalanse.spark.test;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.security.UserGroupInformation;
 
 import java.io.IOException;
 
@@ -22,6 +23,7 @@ public class HdfsAccessTest {
         Configuration conf = new Configuration();
         conf.addResource(new Path("file:///D:/!!!configs/core-site.xml"));
         conf.addResource(new Path("file:///D:/!!!configs/hdfs-site.xml"));
+        UserGroupInformation.setConfiguration(conf);
         return FileSystem.get(conf);
     }
 }
