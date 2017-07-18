@@ -4,6 +4,7 @@ import org.jdom.*;
 import org.jdom.filter.ElementFilter;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.EscapeStrategy;
+import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
 import java.io.FileWriter;
