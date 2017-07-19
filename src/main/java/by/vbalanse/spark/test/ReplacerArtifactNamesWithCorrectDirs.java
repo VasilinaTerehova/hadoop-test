@@ -19,12 +19,9 @@ public class ReplacerArtifactNamesWithCorrectDirs {
         String shimName = "cdh511";
         String shimVendor = "cdh";
         String shimEdition = Edition.EE.getEditionShimName();
-        String pathToPom = "D:\\21\\pentaho-big-data-ee-master\\shims\\" + shimName + "\\target\\generated-sources\\archetype\\";
+        String pathToPom = "D:\\21\\pentaho-hadoop-shims-master\\shims\\" + shimName + "\\target\\generated-sources\\archetype\\";
         String folderWithArchetype = pathToPom + "src\\main\\resources\\META-INF\\maven\\";
         String fileName = folderWithArchetype + "archetype-metadata.xml";
-        String newFileName = folderWithArchetype + "archetype-metadata2.xml";
-        //BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
-        //Scanner scanner = new Scanner(new File(fileName));
 
         PomUpdater.updateShimPom(pathToPom, shimVendor,shimEdition);
 
@@ -40,8 +37,6 @@ public class ReplacerArtifactNamesWithCorrectDirs {
         if (sourceFolder.exists()) {
             FileUtils.moveDirectory(sourceFolder, new File(newAssemblyFolderName));
         }
-
-        //System.out.println(scanner.);
     }
 
     private static void addArtifactGroupIdDefaultValues(String fileName, String shimEdition) throws JDOMException, IOException {
@@ -87,15 +82,9 @@ public class ReplacerArtifactNamesWithCorrectDirs {
         Element requiredElement = readElementFromString("<requiredProperty key=\"" + propertyName + "\">\n" +
                 "      <defaultValue>" + propertyValue + "</defaultValue>\r\n" +
                 "    </requiredProperty>", namespace);
-//        Element requiredElement = new Element("requiredProperty", namespace);
-//        requiredElement.setAttribute("key", propertyName);
-//        Element defaultValue = new Element("defaultValue", namespace);
-//        defaultValue.setText(propertyValue);
-//        requiredElement.addContent(defaultValue);
         if (propertyName.equals("artifactId")) {
             requiredElementsElement.addContent(new Text("  "));
             ((Element)requiredElement.getContent(new ElementFilter("defaultValue")).get(0)).setText("${" + SHIM_NAME + "}");
-            //requiredElement.setText("${" + SHIM_NAME + "}");
         } else {
             requiredElementsElement.addContent(new Text("    "));
         }
@@ -186,5 +175,4 @@ public class ReplacerArtifactNamesWithCorrectDirs {
 
         FileUtils.write(new File(fileName), replacedContent, "utf-8");
     }
-
 }
