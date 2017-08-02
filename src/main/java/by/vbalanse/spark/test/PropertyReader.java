@@ -11,8 +11,7 @@ public class PropertyReader {
 
     public static Properties properties;
 
-    public PropertyReader() {
-
+    public static void initPropertyReader(){
         properties = new Properties();
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
 
